@@ -7,11 +7,11 @@ if ( !defined( 'IMCFS' ) ) {
 }
 
 // MySQL configure
-$cmysql['host'] = 'localhost';
-$cmysql['port'] = '3306';
-$cmysql['user'] = 'root';
-$cmysql['pass'] = 'root';
-$cmysql['dbname'] = 'confe';
+$cmysql['host'] = 'localhost';  // MySQL server host
+$cmysql['port'] = '3306';  // MySQL server port (default 3306)
+$cmysql['user'] = 'root';  // MySQL server username
+$cmysql['pass'] = 'root';  // MySQL server password
+$cmysql['dbname'] = 'confe';  // MySQL server database name
 
 
 ?>
