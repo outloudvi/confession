@@ -1,4 +1,9 @@
 <?php
+
+define ("IMCFS");
+
+include_once('config.php');
+
 session_start();
 
 function clear_all()
