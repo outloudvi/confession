@@ -14,6 +14,14 @@ else
 $conn = mysql_pconnect($cmysqlline, $cmysql['user'], $cmysql['pass']);
 mysql_select_db($cmysql['dbname'], $conn);
 
+function add_confession($content="", $cookieid, $ip, $useragent)
+{
+    $time = time();
+    $content = mysql_real_escape_string($content);
+    $result = mysql_query( " INSERT INTO `content` (`id`, `content`, `cookieid`, `time`, `ip`, `useragent`) VALUES (, $content, $cookieid, $time, $ip, $useragent); " , $conn);
+    if (!$result) die("Error.");
+}
+
 // ******** MySQL conn END ********
 
 session_start();
