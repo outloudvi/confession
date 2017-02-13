@@ -11,10 +11,10 @@ Okay so it is that.
 - Base
     - [x] Submit to see
     - [x] Get Cookie
-    - [ ] Save to database
+    - [x] Save to database
+    - [ ] Read from database
     - [ ] Save Cookie relations
     - [ ] Generate unique Cookie
-    - [ ] Show others
     - [ ] Re-generate or revoke Cookie
     - [ ] 'READ' button
 - Extra
