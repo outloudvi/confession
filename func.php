@@ -1,8 +1,20 @@
 <?php
 
-define ("IMCFS");
+define ("IMCFS",1);
 
 include_once('config.php');
+
+// ******** MySQL conn ********
+
+$cmysqlline = "";
+if ( $cmysql['port'] )
+    $cmysqlline = $cmysql['host'] . ":" . $cmysql['port'];
+else
+    $cmysqlline = $cmysql['host'];
+$conn = mysql_pconnect($cmysqlline, $cmysql['user'], $cmysql['pass']);
+mysql_select_db($cmysql['dbname'], $conn);
+
+// ******** MySQL conn END ********
 
 session_start();
 
@@ -32,6 +44,7 @@ function showLoginCred()
 }
 
 
+// Copied from Quora - -
 /**
  * Generate a random string, using a cryptographically secure 
  * pseudorandom number generator (random_int)

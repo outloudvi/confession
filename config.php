@@ -7,12 +7,11 @@ if ( !defined( 'IMCFS' ) ) {
 }
 
 // MySQL configure
-$cmysql['host'] = '';
-$cmysql['port'] = '';
-$cmysql['user'] = '';
-$cmysql['password'] = '';
-$cmysql['database'] = '';
-$cmysql['table'] = '';
+$cmysql['host'] = 'localhost';
+$cmysql['port'] = '3306';
+$cmysql['user'] = 'root';
+$cmysql['pass'] = 'root';
+$cmysql['dbname'] = 'confe';
 
 
 ?>
