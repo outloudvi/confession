@@ -5,21 +5,28 @@ define ("IMCFS",1);
 include_once('config.php');
 
 // ******** MySQL conn ********
-
-$cmysqlline = "";
-if ( $cmysql['port'] )
-    $cmysqlline = $cmysql['host'] . ":" . $cmysql['port'];
-else
-    $cmysqlline = $cmysql['host'];
-$conn = mysql_pconnect($cmysqlline, $cmysql['user'], $cmysql['pass']);
-mysql_select_db($cmysql['dbname'], $conn);
-
+function connect()
+{
+    global $cmysql;
+    $cmysqlline = "";
+    if ( $cmysql['port'] )
+        $cmysqlline = $cmysql['host'] . ":" . $cmysql['port'];
+    else
+        $cmysqlline = $cmysql['host'];
+    $conn = mysql_pconnect($cmysqlline, $cmysql['user'], $cmysql['pass']);
+    mysql_select_db($cmysql['dbname'], $conn);
+}
 function add_confession($content="", $cookieid, $ip, $useragent)
 {
+    global $conn;
+    if( !$conn ) connect();
     $time = time();
     $content = mysql_real_escape_string($content);
-    $result = mysql_query( " INSERT INTO `content` (`id`, `content`, `cookieid`, `time`, `ip`, `useragent`) VALUES (, $content, $cookieid, $time, $ip, $useragent); " , $conn);
-    if (!$result) die("Error.");
+    $result = mysql_query (" INSERT INTO `content` (`id`, `content`, `cookieid`, `time`, `ip`, `useragent`) VALUES ('' , '$content', '$cookieid', '$time', '$ip', '$useragent'); ");
+    if (!$result)
+        return false;
+    else
+        return true;
 }
 
 // ******** MySQL conn END ********
@@ -50,6 +57,19 @@ function showLoginCred()
         return;
     }
 }
+
+
+function getIPAddress()
+{
+    $ip = "unknown";
+    if (getenv("HTTP_X_FORWARDED_FOR") && strcasecmp(getenv("HTTP_X_FORWARDED_FOR"), "unknown"))
+         $ip = getenv("HTTP_X_FORWARDED_FOR");
+    else if (getenv("REMOTE_ADDR") && strcasecmp(getenv("REMOTE_ADDR"), "unknown"))
+         $ip = getenv("REMOTE_ADDR");
+    else if (isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] && strcasecmp($_SERVER['REMOTE_ADDR'], "unknown"))
+         $ip = $_SERVER['REMOTE_ADDR'];
+    return $ip;
+    }
 
 
 // Copied from Quora - -

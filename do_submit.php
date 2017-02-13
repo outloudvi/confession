@@ -25,7 +25,14 @@
         exit();
     }
     echo "<blockquote>" . $_POST['content'] . "</blockquote>";
-    echo "Done!";
+
+    $ip = getIPAddress();
+    $useragent = $_SERVER['HTTP_USER_AGENT'];
+    $status = add_confession($_POST['content'], $_POST['CookieID'], $ip, $useragent);
+    if ( $status )
+        echo "Done!";
+    else
+        echo "Something goes wrong :(";
 ?>
 
 
