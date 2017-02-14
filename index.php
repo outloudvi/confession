@@ -22,7 +22,7 @@ function loadFinished()
 
 <body>
 <h1> Confession </h1> <br />
-<a href="submit.php">Confess!</a> | <a href="search.php">Search Confession</a> <?php showLoginCred(); ?>
+<a href="submit.php">Confess!</a> <?php showLoginCred(); ?>
 <hr />
 <span> The latest 5 confessions. </span>
 <?php
