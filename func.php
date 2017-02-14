@@ -23,7 +23,7 @@ function add_confession($content="", $cookieid, $ip, $useragent)
     connect();
     $time = time();
     $content = mysql_real_escape_string($content);
-    $result = mysql_query (" INSERT INTO `content` (`id`, `content`, `cookieid`, `time`, `ip`, `useragent`) VALUES ('' , '$content', '$cookieid', '$time', '$ip', '$useragent'); ");
+    $result = mysql_query (" INSERT INTO `content` (`id`, `content`, `cookieid`, `time`, `ip`, `useragent`, `read`) VALUES ('' , '$content', '$cookieid', '$time', '$ip', '$useragent', 0); ");
     if (!$result)
         return false;
     else
@@ -88,6 +88,15 @@ function showContent( $num=5, $offset=0 )
     $num = intval($num);
     $offset = intval($offset);
     echo "<span id='loading' style='color:grey'>Loading Confession...</span>";connect();
+    $retn = mysql_query("SELECT COUNT(*) FROM content");
+    if ( !$retn )
+    {
+        echo "<br /><b>No data.</b><br />";
+        echo "<script type='text/javascript'>loadFinished();</script>";
+        return 0;
+    }
+    $retn = mysql_fetch_array( $retn );
+    $count = $retn['COUNT(*)'];
     $result = mysql_query("SELECT * FROM content ORDER BY id DESC LIMIT $num OFFSET $offset");
     global $ctimezone;
     date_default_timezone_set($ctimezone);
@@ -102,8 +111,8 @@ function showContent( $num=5, $offset=0 )
     }
     echo "</div>";
     echo "<script type='text/javascript'>loadFinished();</script>";
-    $retn = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM content"));
-    return $retn['COUNT(*)'];
+
+    return $count;
 }
 
 // Copied from Quora - -
