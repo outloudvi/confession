@@ -7,7 +7,8 @@ include_once('config.php');
 // ******** MySQL conn ********
 function connect()
 {
-    global $cmysql;
+    global $cmysql,$conn;
+    if( $conn ) exit();
     $cmysqlline = "";
     if ( $cmysql['port'] )
         $cmysqlline = $cmysql['host'] . ":" . $cmysql['port'];
@@ -19,7 +20,7 @@ function connect()
 function add_confession($content="", $cookieid, $ip, $useragent)
 {
     global $conn;
-    if( !$conn ) connect();
+    connect();
     $time = time();
     $content = mysql_real_escape_string($content);
     $result = mysql_query (" INSERT INTO `content` (`id`, `content`, `cookieid`, `time`, `ip`, `useragent`) VALUES ('' , '$content', '$cookieid', '$time', '$ip', '$useragent'); ");
@@ -71,6 +72,39 @@ function getIPAddress()
     return $ip;
     }
 
+/**
+ * showContent()
+ * Used to show the confessions.
+ *
+ * @param $num: Number of items to return.
+ * @param $offset: Offset value.
+ *
+ * @return Count of items.
+ */
+
+function showContent( $num=5, $offset=0 )
+{
+    // Prevent injection
+    $num = intval($num);
+    $offset = intval($offset);
+    echo "<span id='loading' style='color:grey'>Loading Confession...</span>";connect();
+    $result = mysql_query("SELECT * FROM content ORDER BY id DESC LIMIT $num OFFSET $offset");
+    global $ctimezone;
+    date_default_timezone_set($ctimezone);
+    echo "<div id='confession'>";
+    while($line = mysql_fetch_array($result))
+    {
+        $thetime = date("Y-m-d H:i:s",$line['time']);
+        echo "<blockquote>";
+        echo $line['content'];
+        echo "</blockquote><br />";
+        echo "<grey>Posted by " . "Anonymous" . " at " . $thetime .  "</grey><br />";
+    }
+    echo "</div>";
+    echo "<script type='text/javascript'>loadFinished();</script>";
+    $retn = mysql_fetch_array(mysql_query("SELECT COUNT(*) FROM content"));
+    return $retn['COUNT(*)'];
+}
 
 // Copied from Quora - -
 /**

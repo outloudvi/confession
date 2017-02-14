@@ -13,5 +13,6 @@ $cmysql['user'] = 'root';  // MySQL server username
 $cmysql['pass'] = 'root';  // MySQL server password
 $cmysql['dbname'] = 'confe';  // MySQL server database name
 
+$ctimezone = "Asia/Shanghai"; // Timezone
 
 ?>

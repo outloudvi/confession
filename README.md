@@ -12,7 +12,7 @@ Okay so it is that.
     - [x] Submit to see
     - [x] Get Cookie
     - [x] Save to database
-    - [ ] Read from database
+    - [x] Read from database
     - [ ] Save Cookie relations
     - [ ] Generate unique Cookie
     - [ ] Re-generate or revoke Cookie
