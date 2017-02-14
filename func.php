@@ -51,7 +51,7 @@ function showLoginCred()
 {
     if( !gid() )
     {
-        echo "| <a href='login.php'>Login</a>";
+        echo "| Anonymous, get a Cookie <a href='get_cookie.php'>here</a>";
         return;
     } else {
         echo "| Welcome, <a href='manage.php'>" . $_SESSION['CookieID'] . '</a>';
