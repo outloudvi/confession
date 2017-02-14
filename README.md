@@ -15,7 +15,7 @@ Okay so it is that.
     - [x] Read from database
     - [ ] Save Cookie relations
     - [ ] Generate unique Cookie
-    - [ ] Re-generate or revoke Cookie
+    - [x] Re-generate or revoke Cookie
     - [ ] 'READ' button
 - Extra
     - [ ] Statistics
