@@ -22,7 +22,7 @@
 
     echo "Your Cookie ID is : " . $_SESSION['CookieID'] . "<br />";
     echo "<br />";
-    echo "<a href='cookie/revoke.php'>Revoke current Cookie</a> | <a href='cookie/refresh.php'>Get a new Cookie</a>"
+    echo "<a href='cookie/revoke.php'>Revoke current Cookie</a> | <a href='get_cookie.php'>Get a new Cookie</a>"
 ?>
 
 </body>

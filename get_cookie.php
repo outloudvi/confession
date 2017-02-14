@@ -13,9 +13,9 @@
 <hr />
 
 <?php
-    if ( !isset($_SESSION['CookieID']) )
+    if ( isset($_SESSION['CookieID']) )
     {
-        echo "You have got a Cookie with the ID" . $_SESSION['CookieID'];
+        echo "You have got a Cookie with the ID : " . $_SESSION['CookieID'];
         exit();
     }
 ?>
