@@ -1,12 +1,12 @@
-#Confession
+# Confession
 
 A website used to confess anonymously(or not).
 
-*Still in development and have NOT got a release*
+*Still in development and have GOT a release*
 
 Okay so it is that.
 
-##To-Do List
+## To-Do List
 
 - Base
     - [x] Submit to see
@@ -17,10 +17,11 @@ Okay so it is that.
     - [ ] Generate unique Cookie
     - [x] Re-generate or revoke Cookie
     - [ ] 'READ' button
+    - [x] Install script
 - Extra
     - [ ] Statistics
     - [ ] CAPTCHA
     - [ ] Image
     - [ ] API
     - [ ] Verification on getting Cookie
-    - [ ] localization support
+    - [ ] Localization support
