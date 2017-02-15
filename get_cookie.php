@@ -20,7 +20,7 @@
     }
 ?>
 <form method="post" action="give_cookie.php">
-    <input type="submit" name="submit" value="Get you cookie!">
+    <input type="submit" name="submit" value="Get your cookie!">
 </form>
 
 </body>
