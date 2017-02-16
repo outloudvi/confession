@@ -54,14 +54,15 @@ function loadFinished()
     global $ctimezone;
     date_default_timezone_set($ctimezone);
     echo "<div id='confession'>";
-    echo $count . " confessions now.";
+    echo $count . " confessions now.<br />";
     while($line = mysql_fetch_array($result))
     {
         $thetime = date("Y-m-d H:i:s",$line['time']);
         echo "<blockquote>";
         echo $line['content'];
         echo "</blockquote><br />";
-        echo "<grey>#" . $line['id'] . ", posted by " . "Anonymous" . " at " . $thetime .  "</grey> | <a href='remove_pages.php?id=" . $line['id'] ."'>Remove</a>";
+        echo "<small>User-Agent: " . $line['useragent'] . "</small><br />";
+        echo "<small><grey>#" . $line['id'] . ", posted by " . $line['cookieid'] . " at " . $thetime .  "</grey> | <a href='remove_pages.php?id=" . $line['id'] ."'>Remove</a></small>";
     }
     echo "</div>";
     echo "<script type='text/javascript'>loadFinished();</script>";
