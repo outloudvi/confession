@@ -58,6 +58,11 @@ grey {
 
     $result = mysql_query("CREATE TABLE IF NOT EXISTS `content` ( `id` int(11) NOT NULL AUTO_INCREMENT, `content` text NOT NULL, `cookieid` text, `time` text, `ip` text, `useragent` text, `read` int(11) NOT NULL, PRIMARY KEY (`id`), UNIQUE KEY `id` (`id`) ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 ;");
 
+    if( $result )
+        $result = mysql_query("CREATE TABLE IF NOT EXISTS `user` ( `id` int(11) NOT NULL AUTO_INCREMENT, `cookieid` text NOT NULL, `ipaddress` text NOT NULL, `useragent` text NOT NULL, PRIMARY KEY (`id`) ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;");
+    else
+        die("<b>Something goes wrong.</b> Table creation failed.");
+
     if ($result)
         echo "<b>Finished.</b> Delete install.php and you can <a href='../index.php'>use Confession now</a>.";
     else
