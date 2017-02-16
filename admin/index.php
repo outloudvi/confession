@@ -15,6 +15,13 @@ require_once('../func.php');
 <hr />
 
 <?php
+    global $cadminPassword;
+    if( $cadminPassword == '' )
+    {
+        echo "Administration is blocked.";
+        exit();
+    }
+
     if( isset($_GET['action']) )
     {
         if( $_GET['action'] == 'logout' )
@@ -33,7 +40,6 @@ require_once('../func.php');
     elseif( isset($_POST['pwd']) )
     {
         $pPassword = $_POST['pwd'];
-        global $cadminPassword;
         if( $pPassword == $cadminPassword )
         {
             $_SESSION['admin-status'] = 'logon';
@@ -60,6 +66,12 @@ Password: <input type="password" name="pwd">
 </form>
 
 EOT;
+        exit();
+    }
+    elseif ( $_SESSION['admin-status'] == 'logon' )
+    {
+         echo "You have successfully logined.<br />";
+         echo "<a href='pages.php'>Confessions Manager</a> | <a href='users.php'>Users Manager</a> | <a href='index.php?action=logout'>Log out</a>";
         exit();
     }
 ?>
