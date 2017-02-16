@@ -162,8 +162,9 @@ function showContent( $num=5, $offset=0 )
     $retn = mysql_query("SELECT COUNT(*) FROM content");
     if ( !$retn )
     {
-        die("<br /><b>Database connection error.</b><br />");
-        return false;
+        echo "<br /><b>Database connection error.</b><br />";
+        echo "<script type='text/javascript'>loadFinished();</script>";
+        exit();
     }
     $retn = mysql_fetch_array( $retn );
     $count = $retn['COUNT(*)'];
