@@ -4,12 +4,12 @@
 
 <head>
 <meta charset="utf-8" />
-<title>Get Cookie | Confess</title>
+<title>Get new Cookie / Login | Confess</title>
 </head>
 
 <body>
 <h1> Get Cookie </h1> <br />
-<a href="index.php">&lt;&lt;Main page</a> | <a href="submit.php">Confess!</a> | <a href="login.php">Login</a> if you have already got a cookie
+<a href="index.php">&lt;&lt;Main page</a> | <a href="submit.php">Confess!</a>
 <hr />
 
 <?php
@@ -22,7 +22,7 @@
     }
 ?>
 <form method="post" action="give_cookie.php">
-    <input type="submit" name="submit" value="Get your cookie!">
+    <input type="submit" name="submit" value="Get your cookie OR Login">
 </form>
 
 </body>
