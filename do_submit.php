@@ -30,9 +30,15 @@
     $useragent = $_SERVER['HTTP_USER_AGENT'];
     $status = add_confession($_POST['content'], $_POST['CookieID'], $ip, $useragent);
     if ( $status )
+    {
         echo "Done!";
+        echo "<a href='index.php'>Return to mainpage</a>.";
+    }
     else
-        echo "Something goes wrong :(";
+    {
+        echo "Something goes wrong :(<br />";
+        echo "<a href='submit.php'>Retry</a>.";
+    }
 ?>
 
 
