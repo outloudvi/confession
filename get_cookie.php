@@ -16,6 +16,8 @@
     if ( isset($_SESSION['CookieID']) )
     {
         echo "You have got a Cookie with the ID : " . $_SESSION['CookieID'];
+        echo "<br />";
+        echo "<a href='clear.php'>Revoke your ID</a> before getting a new one.";
         exit();
     }
 ?>

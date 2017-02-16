@@ -12,6 +12,14 @@
 <?php
     unset($_SESSION['CookieID']);
     unset($_COOKIE['CookieID']);
+    $ipaddress = getIPAddress();
+    $result = delUser( $ipaddress );
+    if( $result )
+    {
+        echo "<span style='color:grey'>Cookie(s) via IP $ipaddress has/have been removed.</span><br />"; 
+    } else {
+        die( "Cookie revocation error.<br />" );
+    }
 ?>
 
 <h1> Done. Your Cookie has been revoked. </h1> <br />

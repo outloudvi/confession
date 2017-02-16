@@ -4,19 +4,28 @@ define ("IMCFS",1);
 
 include_once('config.php');
 
+$conn = "";
+$connected = false;
+
 // ******** MySQL conn ********
 function connect()
 {
-    global $cmysql,$conn;
-    if( $conn ) exit();
+    global $cmysql,$connected;
+    if( $connected ) return;
     $cmysqlline = "";
     if ( $cmysql['port'] )
         $cmysqlline = $cmysql['host'] . ":" . $cmysql['port'];
     else
         $cmysqlline = $cmysql['host'];
     $conn = mysql_pconnect($cmysqlline, $cmysql['user'], $cmysql['pass']);
+    if( !$conn )
+    {
+        die("<b>Database connection error.</b><br />");
+    }
     mysql_select_db($cmysql['dbname'], $conn);
+    $connected = true;
 }
+
 function add_confession($content="", $cookieid, $ip, $useragent)
 {
     global $conn;
@@ -72,6 +81,68 @@ function getIPAddress()
     return $ip;
     }
 
+function getCookieFromIP( $ipaddress )
+{
+    global $conn;
+    connect();
+    $retn = mysql_query("SELECT * FROM user WHERE ipaddress='$ipaddress' ");
+    if( !$retn )
+    {
+        die("Database connection error while looking up IP.");
+        return true;
+    }
+    $line = mysql_fetch_array( $retn );
+    if( !$line )
+    {
+        echo "You are newbies!<br />";
+        return false;
+    }
+    return $line['cookieid'];
+}
+
+function hasIDInDatabase( $cookieid )
+{
+    global $conn;
+    connect();
+    $retn = mysql_query("SELECT * FROM user WHERE cookieid='$cookieid' ");
+    if( !$retn )
+    {
+        die("Database connection error while looking up CookieID.");
+        return true;
+    }
+    $line = mysql_fetch_array( $retn );
+    if( $line )
+        return true;
+    return false;
+}
+
+function addUser( $cookieid, $ipaddress, $useragent )
+{
+    global $conn;
+    connect();
+    $time = time();
+    $result = mysql_query (" INSERT INTO `user` (`id`, `cookieid`, `ipaddress`, `useragent`) VALUES ('' , '$cookieid', '$ipaddress', '$useragent'); ");
+    if (!$result)
+    {
+        echo "<b>Database connection error.</b><br />";
+        return false;
+    } else
+        return true;
+}
+
+function delUser( $ipaddress )
+{
+    global $conn;
+    connect();
+    $result = mysql_query (" DELETE FROM `user` WHERE ipaddress = '$ipaddress' ");
+    if (!$result)
+    {
+        die("<b>Database connection error.</b><br />");
+        return false;
+    }
+    return true;
+}
+
 /**
  * showContent()
  * Used to show the confessions.
@@ -91,12 +162,17 @@ function showContent( $num=5, $offset=0 )
     $retn = mysql_query("SELECT COUNT(*) FROM content");
     if ( !$retn )
     {
-        echo "<br /><b>No data.</b><br />";
-        echo "<script type='text/javascript'>loadFinished();</script>";
-        return 0;
+        die("<br /><b>Database connection error.</b><br />");
+        return false;
     }
     $retn = mysql_fetch_array( $retn );
     $count = $retn['COUNT(*)'];
+    if( $count == 0 )
+    {
+        echo "<br /><b>No data now.</b><br />";
+        echo "<script type='text/javascript'>loadFinished();</script>";
+        return false;
+    }
     $result = mysql_query("SELECT * FROM content ORDER BY id DESC LIMIT $num OFFSET $offset");
     global $ctimezone;
     date_default_timezone_set($ctimezone);

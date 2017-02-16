@@ -13,8 +13,8 @@ Okay so it is that.
     - [x] Get Cookie
     - [x] Save to database
     - [x] Read from database
-    - [ ] Save Cookie relations
-    - [ ] Generate unique Cookie
+    - [x] Save Cookie relations
+    - [x] Generate unique Cookie
     - [x] Re-generate or revoke Cookie
     - [ ] 'READ' button
 - Extra
