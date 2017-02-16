@@ -15,4 +15,6 @@ $cmysql['dbname'] = 'confe';  // MySQL server database name
 
 $ctimezone = "Asia/Shanghai"; // Timezone
 
+$cadminPassword = "test";
+
 ?>
