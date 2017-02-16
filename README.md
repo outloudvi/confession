@@ -19,6 +19,7 @@ Okay so it is that.
     - [ ] 'READ' button
     - [x] Install script
 - Extra
+    - [ ] Administration *partly done*
     - [ ] Statistics
     - [ ] CAPTCHA
     - [ ] Image
