@@ -2,7 +2,7 @@
 
 A website used to confess anonymously(or not).
 
-*Still in development and have GOT a release*
+*Still in development and have GOT some [releases](https://github.com/outloudvi/confession/releases)*
 
 Okay so it is that.
 
