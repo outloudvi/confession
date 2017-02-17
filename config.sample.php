@@ -25,4 +25,7 @@ $ctimezone = "Asia/Shanghai"; // Timezone
 // Administration
 $cadminPassword = ""; // Password for administrator. The administration will NOT be useable if the password is empty.
 
+// Vote
+$cvoteInterval = 86400; // Vote interval for a certain confession. (calculated by second)
+
 ?>
