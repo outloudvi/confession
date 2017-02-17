@@ -27,3 +27,4 @@ Okay so it is that.
     - [ ] API
     - [ ] Verification on getting Cookie
     - [ ] Localization support
+    - [ ] Testcases for CI
