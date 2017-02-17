@@ -4,8 +4,6 @@ A website used to confess anonymously(or not).
 
 *Still in development and have GOT some [releases](https://github.com/outloudvi/confession/releases)*
 
-Okay so it is that.
-
 ## To-Do List
 
 - Base
@@ -23,8 +21,8 @@ Okay so it is that.
     - [ ] IP Blacklist
     - [ ] Statistics
     - [ ] CAPTCHA
-    - [ ] Image
     - [ ] API
-    - [ ] Verification on getting Cookie
+    - [ ] Verification of getting Cookie
     - [ ] Localization support
     - [ ] Testcases for CI
+    - [ ] PSR (PHP Standard Recommendations) compatible
