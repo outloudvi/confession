@@ -143,6 +143,11 @@ function delUser( $ipaddress )
     return true;
 }
 
+function addOne( $id )
+{
+
+}
+
 /**
  * showContent()
  * Used to show the confessions.
@@ -184,7 +189,7 @@ function showContent( $num=5, $offset=0 )
         echo "<blockquote>";
         echo $line['content'];
         echo "</blockquote><br />";
-        echo "<grey>Posted by " . "Anonymous" . " at " . $thetime .  "</grey><br />";
+        echo "<a href='read.php?id=" . $line['id'] . "'>Read</a> | <grey>#" . $line['id'] . " Posted by " . "Anonymous" . " at " . $thetime .  "</grey><br />";
     }
     echo "</div>";
     echo "<script type='text/javascript'>loadFinished();</script>";
