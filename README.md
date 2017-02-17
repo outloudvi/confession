@@ -16,7 +16,7 @@ Okay so it is that.
     - [x] Save Cookie relations
     - [x] Generate unique Cookie
     - [x] Re-generate or revoke Cookie
-    - [ ] 'READ' button
+    - [x] 'READ' button
     - [x] Install script
 - Extra
     - [x] Administration
