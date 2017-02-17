@@ -6,8 +6,12 @@ include_once('config.php');
 
 $conn = "";
 $connected = false;
+session_start();
 
-// ******** MySQL conn ********
+/**
+ * connect()
+ * Connecting to MySQL server. You may need "global $conn;" before this.
+ */
 function connect()
 {
     global $cmysql,$connected;
@@ -26,6 +30,17 @@ function connect()
     $connected = true;
 }
 
+/**
+ * add_confession()
+ * Submit a confession to database.
+ *
+ * @param string $content     Confession content, default empty.
+ * @param string $cookieid    CookieID of the submitter.
+ * @param string $ip          IP address of the submitter.
+ * @param string $useragent   User-agent of the submitter.
+ *
+ * @return 'true' for a success. (vise versa.)
+ */
 function add_confession($content="", $cookieid, $ip, $useragent)
 {
     global $conn;
@@ -39,26 +54,14 @@ function add_confession($content="", $cookieid, $ip, $useragent)
         return true;
 }
 
-// ******** MySQL conn END ********
-
-session_start();
-
-function clear_all()
-{
-    session_destroy();
-}
-
-function gid()
-{
-    if( isset($_SESSION['CookieID']) )
-        return $_SESSION['CookieID'];
-    else
-        return 0;
-}
-
+/**
+ * showLoginCred()
+ * Show login creditals.
+ * It does the output itself.
+ */
 function showLoginCred()
 {
-    if( !gid() )
+    if( !isset($_SESSION['CookieID']) )
     {
         echo "| Anonymous, get a Cookie <a href='get_cookie.php'>here</a>";
         return;
@@ -68,7 +71,11 @@ function showLoginCred()
     }
 }
 
-
+/**
+ * getIPAddress()
+ *
+ * @return IP address of the user. 
+ */
 function getIPAddress()
 {
     $ip = "unknown";
@@ -81,6 +88,13 @@ function getIPAddress()
     return $ip;
     }
 
+/**
+ * getCookieFromIP()
+ * Get the CookieID (not cookie!) of the IP.
+ * 
+ * @param string $ipaddress IP to look up.
+ * @return 'false' for a new user. For a registered user, the CookieIE will be returned.
+ */
 function getCookieFromIP( $ipaddress )
 {
     global $conn;
@@ -100,6 +114,13 @@ function getCookieFromIP( $ipaddress )
     return $line['cookieid'];
 }
 
+/**
+ * hasIDInDatabase()
+ * Used to against the generator collide.
+ *
+ * @param string $cookieid CookieID to look up.
+ * @return 'true' for a existance, and 'false' for a unique CookieID.
+ */
 function hasIDInDatabase( $cookieid )
 {
     global $conn;
@@ -116,6 +137,16 @@ function hasIDInDatabase( $cookieid )
     return false;
 }
 
+/**
+ * addUser()
+ * Used to add a user (or connect CookieID to IP)
+ *
+ * @param string $cookieid    Generated CookieID.
+ * @param string $ipaddress   IP of the user.
+ * @param string $useragent   User-agent of the user.
+ *
+ * @return the status boolean.
+ */
 function addUser( $cookieid, $ipaddress, $useragent )
 {
     global $conn;
@@ -130,6 +161,13 @@ function addUser( $cookieid, $ipaddress, $useragent )
         return true;
 }
 
+/**
+ * delUser()
+ * Delete CookieID records attached to a certain IP.
+ *
+ * @param string $ipaddress  The IP.
+ * @return A status boolean.
+ */
 function delUser( $ipaddress )
 {
     global $conn;
@@ -147,12 +185,11 @@ function delUser( $ipaddress )
  * showContent()
  * Used to show the confessions.
  *
- * @param $num: Number of items to return.
- * @param $offset: Offset value.
+ * @param int $num      Number of items to return.
+ * @param int $offset   Offset value.
  *
  * @return Count of items.
  */
-
 function showContent( $num=5, $offset=0 )
 {
     // Prevent injection
@@ -196,20 +233,16 @@ function showContent( $num=5, $offset=0 )
     return $count;
 }
 
-// Copied from Quora - -
 /**
- * Generate a random string, using a cryptographically secure 
- * pseudorandom number generator (random_int)
- * 
- * For PHP 7, random_int is a PHP core function
- * For PHP 5.x, depends on https://github.com/paragonie/random_compat
+ * random_str()
+ * Code modified from the answer of Scott Arciszewski @ SOF.
  * 
  * @param int $length      How many characters do we want?
  * @param string $keyspace A string of all possible characters
  *                         to select from
  * @return string
  */
-function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+function random_str($length, $keyspace)
 {
     $str = '';
     $max = mb_strlen($keyspace, '8bit') - 1;
@@ -219,10 +252,4 @@ function random_str($length, $keyspace = '0123456789abcdefghijklmnopqrstuvwxyzAB
     return $str;
 }
 
-/*
-Usage:
-
-$a = random_str(32);
-$b = random_str(8, 'abcdefghijklmnopqrstuvwxyz');
-*/
 ?>
