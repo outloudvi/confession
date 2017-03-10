@@ -1,10 +1,8 @@
-<!DOCTYPE HTML>
-<?php require_once('func.php') ?>
-<html>
-
-<head>
-<meta charset="utf-8" />
-<title>Confess</title>
+<?php 
+require_once('func.php');
+global $ctitle;
+echo HTMLhead($ctitle, true);
+?>
 
 <style>
 grey {

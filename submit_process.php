@@ -1,11 +1,8 @@
-<!DOCTYPE HTML>
-<?php require_once('func.php') ?>
-<html>
-
-<head>
-<meta charset="utf-8" />
-<title>Just one step... | Confess</title>
-</head>
+<?php 
+require_once('func.php');
+global $ctitle;
+echo HTMLhead('Just one step... | ' . $ctitle);
+?>
 
 <body>
 <h1> Submit your confession </h1> <br />

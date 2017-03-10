@@ -4,12 +4,11 @@ require_once('func.php');
 global $page;
 $page = 1;
 $page = isset($_GET['page']) ? $_GET['page'] : 1;
-?>
-<html>
 
-<head>
-<meta charset="utf-8" />
-<title>Page <?php global $page; echo $page; ?> | Confession List</title>
+require_once('func.php');
+global $ctitle;
+echo HTMLhead("Page $page [List] | " . $ctitle, true);
+?>
 
 <style>
 grey {

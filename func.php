@@ -252,4 +252,19 @@ function random_str($length, $keyspace)
     return $str;
 }
 
+function HTMLhead($title, $notail=false, $charset='utf-8')
+{
+    $dt = <<< EOF
+<!DOCTYPE HTML>
+<head>
+    <meta charset="$charset">
+    <title> $title </title>
+EOF;
+    if (!$notail)
+    {
+        $dt = $dt . '</head>';
+    }
+    return $dt;
+}
+
 ?>

@@ -1,11 +1,8 @@
-<!DOCTYPE HTML>
-<?php require_once('func.php') ?>
-<html>
-
-<head>
-<meta charset="utf-8" />
-<title>Get new Cookie / Login | Confess</title>
-</head>
+<?php 
+require_once('func.php');
+global $ctitle;
+echo HTMLhead('Get new cookie / login | ' . $ctitle, true);
+?>
 
 <body>
 <h1> Get Cookie </h1> <br />

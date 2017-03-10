@@ -1,15 +1,8 @@
-<!DOCTYPE HTML>
-<?php
+<?php 
 require_once('func.php');
+global $ctitle;
+echo HTMLhead('Read | ' . $ctitle, true);
 ?>
-<html>
-
-<head>
-<meta charset="utf-8" />
-<title>Read | Confession</title>
-
-</head>
-
 <body>
 
 <?php
