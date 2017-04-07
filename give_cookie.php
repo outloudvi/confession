@@ -25,7 +25,7 @@ echo HTMLhead('Get Cookie | ' . $ctitle, true);
         $_SESSION['CookieID'] = $origcookie;
         $_COOKIE['CookieID'] = $origcookie;
 
-        echo "<a href='index.php'>Get back to the main page.</a>";
+        echo "<a href='index.php'>Get back to the main page.</a> or <a href='submit.php'>Confess now</a>.";
         exit();
     }
 
