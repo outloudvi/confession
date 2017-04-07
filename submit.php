@@ -26,6 +26,8 @@ if (! isset($_SESSION['CookieID']) )
     <input type="submit" name="submit" value="Submit">
 </form>
 
+<p style='font-size: 70%'>By clicking 'Submit', you agree that your IP and User-Agent data will be collected and saved with your confession.</p>
+
 </body>
 
 </html>
