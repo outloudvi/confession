@@ -2,6 +2,7 @@
 
 define ("IMCFS",1);
 
+include_once('version.php');
 include_once('config.php');
 
 $debug_mode = true;
