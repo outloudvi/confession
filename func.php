@@ -5,7 +5,6 @@ define ("IMCFS",1);
 include_once('config.php');
 
 $debug_mode = true;
-$pdo = null;
 $connected = false;
 session_start();
 
@@ -26,7 +25,7 @@ function console( $text="" )
  */
 function connect()
 {
-    global $cmysql,$connected;
+    global $cmysql,$connected,$pdo;
     if( $connected ) return;
     $cmysqlline = "";
     if ( !$cmysql['port'] )
@@ -55,12 +54,12 @@ function connect()
  */
 function add_confession($content="", $cookieid, $ip, $useragent)
 {
-    global $conn;
+    global $pdo;
     connect();
     $time = time();
-    $content = mysql_real_escape_string($content);
-    $result = mysql_query (" INSERT INTO `content` (`id`, `content`, `cookieid`, `time`, `ip`, `useragent`, `read`) VALUES ('' , '$content', '$cookieid', '$time', '$ip', '$useragent', 0); ");
-    if (!$result)
+    $content = $pdo -> quote ($content);
+    $result = $pdo -> exec (" INSERT INTO `content` (`id`, `content`, `cookieid`, `time`, `ip`, `useragent`, `read`) VALUES ('' , $content, '$cookieid', '$time', '$ip', '$useragent', 0); ");
+    if ($result === false)
         return false;
     else
         return true;
@@ -109,21 +108,23 @@ function getIPAddress()
  */
 function getCookieFromIP( $ipaddress )
 {
-    global $conn;
+    global $pdo;
     connect();
-    $retn = mysql_query("SELECT * FROM user WHERE ipaddress='$ipaddress' ");
-    if( !$retn )
+    $retn = $pdo -> query("SELECT * FROM user WHERE ipaddress='$ipaddress' ");
+    if( $retn === false )
     {
         die("Database connection error while looking up IP.");
         return true;
     }
-    $line = mysql_fetch_array( $retn );
+    foreach ( $retn as $line )
+    {
     if( !$line )
     {
         echo "You are newbies!<br />";
         return false;
     }
     return $line['cookieid'];
+    }
 }
 
 /**
@@ -135,15 +136,15 @@ function getCookieFromIP( $ipaddress )
  */
 function hasIDInDatabase( $cookieid )
 {
-    global $conn;
+    global $pdo;
     connect();
-    $retn = mysql_query("SELECT * FROM user WHERE cookieid='$cookieid' ");
-    if( !$retn )
+    $retn = $pdo -> query("SELECT * FROM user WHERE cookieid='$cookieid' ");
+    if( $retn === false )
     {
         die("Database connection error while looking up CookieID.");
         return true;
     }
-    $line = mysql_fetch_array( $retn );
+    foreach( $retn as $line )
     if( $line )
         return true;
     return false;
@@ -161,11 +162,11 @@ function hasIDInDatabase( $cookieid )
  */
 function addUser( $cookieid, $ipaddress, $useragent )
 {
-    global $conn;
+    global $pdo;
     connect();
     $time = time();
-    $result = mysql_query (" INSERT INTO `user` (`id`, `cookieid`, `ipaddress`, `useragent`) VALUES ('' , '$cookieid', '$ipaddress', '$useragent'); ");
-    if (!$result)
+    $result = $pdo -> query (" INSERT INTO `user` (`id`, `cookieid`, `ipaddress`, `useragent`) VALUES ('' , '$cookieid', '$ipaddress', '$useragent'); ");
+    if ($result === false)
     {
         echo "<b>Database connection error.</b><br />";
         return false;
@@ -182,10 +183,10 @@ function addUser( $cookieid, $ipaddress, $useragent )
  */
 function delUser( $ipaddress )
 {
-    global $conn;
+    global $pdo;
     connect();
-    $result = mysql_query (" DELETE FROM `user` WHERE ipaddress = '$ipaddress' ");
-    if (!$result)
+    $result = $pdo -> query (" DELETE FROM `user` WHERE ipaddress = '$ipaddress' ");
+    if ($result === false)
     {
         die("<b>Database connection error.</b><br />");
         return false;
@@ -204,30 +205,31 @@ function delUser( $ipaddress )
  */
 function showContent( $num=5, $offset=0 )
 {
+    global $pdo;
     // Prevent injection
     $num = intval($num);
     $offset = intval($offset);
     echo "<span id='loading' style='color:grey'>Loading Confession...</span>";connect();
-    $retn = mysql_query("SELECT COUNT(*) FROM content");
-    if ( !$retn )
+    $retn = $pdo -> query ("SELECT COUNT(*) FROM content");
+    if ( $retn === false )
     {
         echo "<br /><b>Database connection error.</b><br />";
         echo "<script type='text/javascript'>loadFinished();</script>";
         exit();
     }
-    $retn = mysql_fetch_array( $retn );
-    $count = $retn['COUNT(*)'];
+    foreach( $retn as $list )
+    $count = $list['COUNT(*)'];
     if( $count == 0 )
     {
         echo "<br /><b>No data now.</b><br />";
         echo "<script type='text/javascript'>loadFinished();</script>";
         return false;
     }
-    $result = mysql_query("SELECT * FROM content ORDER BY id DESC LIMIT $num OFFSET $offset");
+    $result = $pdo -> query("SELECT * FROM content ORDER BY id DESC LIMIT $num OFFSET $offset");
     global $ctimezone;
     date_default_timezone_set($ctimezone);
     echo "<div id='confession'>";
-    while($line = mysql_fetch_array($result))
+    foreach( $result as $line )
     {
         $thetime = date("Y-m-d H:i:s",$line['time']);
         echo "<blockquote>";
