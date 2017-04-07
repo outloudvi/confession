@@ -33,13 +33,14 @@ function connect()
         $cmysqlline = $cmysql['host'] . ":" . $cmysql['port'];
     else
         $cmysqlline = $cmysql['host'];
-    $conn = mysql_pconnect($cmysqlline, $cmysql['user'], $cmysql['pass']);
-    if( !$conn )
+    $pdo = new PDO("mysql:host=".$cmysql['host'].";dbname=".$cmysql['dbname'], $cmysql['user'],$cmysql['pass']);
+    if( $pdo -> exec ("SELECT hello;") )
     {
+        console("database connected");
+        $connected = true;
+    } else {
         die("<b>Database connection error.</b><br />");
     }
-    mysql_select_db($cmysql['dbname'], $conn);
-    $connected = true;
 }
 
 /**
