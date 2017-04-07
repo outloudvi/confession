@@ -4,9 +4,21 @@ define ("IMCFS",1);
 
 include_once('config.php');
 
-$conn = "";
+$debug_mode = true;
+$pdo = null;
 $connected = false;
 session_start();
+
+/**
+ * console()
+ * Output when $debug_mode is true.
+ */
+function console( $text="" )
+{
+    global $debug_mode;
+    if ( $debug_mode )
+        echo(text);
+}
 
 /**
  * connect()
