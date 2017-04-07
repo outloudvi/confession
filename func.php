@@ -17,7 +17,7 @@ function console( $text="" )
 {
     global $debug_mode;
     if ( $debug_mode )
-        echo(text);
+        echo( $text );
 }
 
 /**
@@ -29,18 +29,16 @@ function connect()
     global $cmysql,$connected;
     if( $connected ) return;
     $cmysqlline = "";
-    if ( $cmysql['port'] )
-        $cmysqlline = $cmysql['host'] . ":" . $cmysql['port'];
-    else
-        $cmysqlline = $cmysql['host'];
-    $pdo = new PDO("mysql:host=".$cmysql['host'].";dbname=".$cmysql['dbname'], $cmysql['user'],$cmysql['pass']);
-    if( $pdo -> exec ("SELECT hello;") )
+    if ( !$cmysql['port'] )
+        $cmysql['port'] = '3306';
+
+    try {
+    $pdo = new PDO("mysql:host=".$cmysql['host'].";port=".$cmysql['port'].";dbname=".$cmysql['dbname'], $cmysql['user'],$cmysql['pass']);
+    } catch (PDOException $e)
     {
-        console("database connected");
-        $connected = true;
-    } else {
         die("<b>Database connection error.</b><br />");
     }
+    $connected = true;
 }
 
 /**
