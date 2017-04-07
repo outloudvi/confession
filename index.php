@@ -27,7 +27,8 @@ function loadFinished()
     showContent(5);
 ?>
 <hr />
-<a href="show.php">More...</a>
+<a href="show.php">More...</a><br />
+<?php showVersion(); ?>
 
 </body>
 

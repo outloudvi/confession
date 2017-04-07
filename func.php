@@ -282,4 +282,14 @@ EOF;
     return $dt;
 }
 
+/**
+ * showVersion()
+ * Show the version by text.
+ */
+function showVersion()
+{
+    global $CONF_VERSION;
+    echo "Powered by <a href='https://github.com/outloudvi/confession'>Confession</a> $CONF_VERSION.";
+}
+
 ?>
