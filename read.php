@@ -24,14 +24,14 @@ echo HTMLhead('Read | ' . $ctitle, true);
         exit();
     }
 
-    global $conn;
+    global $pdo;
     connect();
 
-    $query = mysql_query("UPDATE `content` SET content.read=content.read+1 WHERE content.id=" . $conid . ";");
+    $query = $pdo -> query("UPDATE `content` SET content.read=content.read+1 WHERE content.id=" . $conid . ";");
 
     setcookie("read_" . $conid,"true", time()+$cvoteInterval);
 
-    if( $query )
+    if( $query !== false )
     {
         echo "Operation is done.<br />";
         echo "<a onclick='history.back(-1);' style='color:#0000FF; text-decoration:underline;'>Return</a>.";
