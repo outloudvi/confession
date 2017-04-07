@@ -18,7 +18,7 @@ echo HTMLhead('Get Cookie | ' . $ctitle, true);
     $origcookie = getCookieFromIP($ipaddress);
     if( $origcookie != false )
     {
-        echo "Cookie not created.<br />";
+        echo "New cookie is not created.<br />";
         echo "You have a Cookie which has the ID : " . $origcookie . "<br />";
         echo "You have been logined with that ID.<Br />";
 
