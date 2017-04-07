@@ -36,9 +36,10 @@ function connect()
     $pdo = new PDO("mysql:host=".$cmysql['host'].";port=".$cmysql['port'].";dbname=".$cmysql['dbname'], $cmysql['user'],$cmysql['pass']);
     } catch (PDOException $e)
     {
-        die("<b>Database connection error.</b><br />");
+        die("<b>Database connection error:</b>".$e->getMessage());
     }
     $connected = true;
+    $pdo -> query('set names utf8;');
 }
 
 /**
