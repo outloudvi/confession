@@ -33,7 +33,7 @@ function connect()
         $cmysql['port'] = '3306';
 
     try {
-    $pdo = new PDO("mysql:host=".$cmysql['host'].";port=".$cmysql['port'].";dbname=".$cmysql['dbname'], $cmysql['user'],$cmysql['pass']);
+    $pdo = new PDO("mysql:host=".$cmysql['host'].";port=".$cmysql['port'].";dbname=".$cmysql['dbname'], $cmysql['user'],$cmysql['pass'],array(PDO::ATTR_PERSISTENT => true));
     } catch (PDOException $e)
     {
         die("<b>Database connection error:</b>".$e->getMessage());
