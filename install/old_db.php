@@ -22,30 +22,25 @@ grey {
 <?php
     define("IMCFS",1);
     include_once("../config.php");
-    global $cmysql,$conn;
-    if( $conn ) exit();
-    $cmysqlline = "";
-    if ( $cmysql['port'] )
-        $cmysqlline = $cmysql['host'] . ":" . $cmysql['port'];
-    else
-        $cmysqlline = $cmysql['host'];
-    $conn = mysql_pconnect($cmysqlline, $cmysql['user'], $cmysql['pass']);
-    if(!$conn)
-        die("<b>Cannot connect to database.</b> Maybe a wrong password or server down?");
-    echo "<b>Server connected.</b><br />";
     
-    $result = mysql_select_db($cmysql['dbname'], $conn);
+    global $cmysql,$connected,$pdo;
+    if( $connected ) return;
+    $cmysqlline = "";
+    if ( !$cmysql['port'] )
+        $cmysql['port'] = '3306';
 
-    $dbExists = false;
-
-    if(!$result)
+    try {
+    $pdo = new PDO("mysql:host=".$cmysql['host'].";port=".$cmysql['port'], $cmysql['user'],$cmysql['pass'],array(PDO::ATTR_PERSISTENT => true));
+    } catch (PDOException $e)
     {
-        die("<b>Great! The database doesn't exist.</b><a href='check.php'>Go back to installing Confession.</a>.<br />");
+        die("<b>Database connection error:</b>".$e->getMessage());
     }
+    $connected = true;
+    $pdo -> query('set names utf8;');
 
-    $result = mysql_query("DROP DATABASE " . $cmysql['dbname']);
+    $result = $pdo -> query ("DROP DATABASE `" . $cmysql['dbname'] ."`");
 
-    if ($result)
+    if ($result !== false)
         echo "<b>Finished.</b> <a href='check.php'>Go back to installing Confession.</a>.";
     else
         die("<b>Something goes wrong.</b>");
