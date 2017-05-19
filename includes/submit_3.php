@@ -28,7 +28,7 @@ echo HTMLhead('Submitting... | ' . $ctitle, false);
     $status = add_confession($_POST['content'], $_POST['CookieID'], $ip, $useragent);
     if ( $status )
     {
-        echo "Done!";
+        echo "Done!<br />";
         echo "<a href='index.php'>Return to mainpage</a>.";
     }
     else
