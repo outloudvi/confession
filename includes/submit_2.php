@@ -20,7 +20,7 @@ echo HTMLhead('Just one step... | ' . $ctitle);
     echo "<blockquote>" . $_POST['content'] . "</blockquote>";
     echo "<br /> is it?";
 ?>
-    <form method="post" action="do_submit.php">
+    <form method="post" action="submit.php">
     <input type="hidden" name="CookieID" value="<?php echo $_SESSION['CookieID']; ?>" />
     <input type="hidden" name="content" value="<?php echo $_POST['content']; ?>" />
     <input type="submit" name="submit" value="Yes, and submit it">
