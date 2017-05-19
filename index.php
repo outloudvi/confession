@@ -19,15 +19,15 @@ function loadFinished()
 </head>
 
 <body>
-<h1> Confession </h1> <br />
+<h1> Confession </h1>
 <a href="submit.php">Confess!</a> <?php showLoginCred(); ?>
 <hr />
-<span> The latest 5 confessions. </span>
+<span id=bef> The latest 5 confessions. </span>
 <?php
     showContent(5);
 ?>
 <hr />
-<a href="show.php">More...</a><br />
+<a id=more href="show.php">More...</a><br />
 <?php showVersion(); ?>
 
 </body>

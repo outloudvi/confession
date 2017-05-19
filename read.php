@@ -46,6 +46,7 @@ echo HTMLhead('Read | ' . $ctitle, true);
     }
     
 ?>
+<?php showVersion(); ?>
 
 </body>
 

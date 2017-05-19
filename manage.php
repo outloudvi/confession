@@ -21,7 +21,7 @@ echo HTMLhead('Management | ' . $ctitle, true);
     echo "<br />";
     echo "<a href='cookie/revoke.php'>Revoke current Cookie</a> | <a href='get_cookie.php'>Get a new Cookie</a>"
 ?>
-
+<?php showVersion(); ?>
 </body>
 
 </html>

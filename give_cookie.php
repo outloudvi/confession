@@ -47,7 +47,7 @@ echo HTMLhead('Get Cookie | ' . $ctitle, true);
     if( isset($_SESSION['CookieID']) )
         echo "Done! Your cookie is : " . $_SESSION['CookieID'];
 ?>
-
+<?php showVersion(); ?>
 </body>
 
 </html>

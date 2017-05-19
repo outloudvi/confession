@@ -47,7 +47,7 @@ function loadFinished()
     if( $hasNextPage )
         echo "<a href='show.php?page=" . $nextPage . "'>Page " . $nextPage . "</a>";
 ?>
-
+<?php showVersion(); ?>
 </body>
 
 </html>

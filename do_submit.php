@@ -38,7 +38,7 @@ echo HTMLhead('Submitting... | ' . $ctitle, false);
     }
 ?>
 
-
+<?php showVersion(); ?>
 
 </body>
 

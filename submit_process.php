@@ -25,7 +25,7 @@ echo HTMLhead('Just one step... | ' . $ctitle);
     <input type="hidden" name="content" value="<?php echo $_POST['content']; ?>" />
     <input type="submit" name="submit" value="Yes, and submit it">
 </form>
-
+<?php showVersion(); ?>
 
 </body>
 
