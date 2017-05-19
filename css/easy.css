@@ -1,0 +1,38 @@
+html {
+    background: rgb(243,243,243);
+}
+
+h1 {
+    color: rgb(128,128,128);
+    margin-bottom: 15px;
+}
+
+#bef {
+    color: rgb(149,149,149);
+}
+
+#foot-version {
+    display: inline;
+    color: rgb(149,149,149);
+    text-align: center;
+}
+
+blockquote {
+    margin-top: 25px;
+    margin-left: 0px;
+    margin-bottom: 5px;
+}
+
+a.var {
+    color: rgb(64,64,64);
+    text-decoration: none;
+}
+
+#more {
+    color: rgb(64,64,64);
+}
+
+#foot-version > a {
+    color: rgb(128,128,128);
+    text-decoration: none;
+}
