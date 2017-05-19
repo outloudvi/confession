@@ -26,7 +26,7 @@ function loadFinished()
 
 <body>
 <h1> Confession List </h1> <br />
-<a href="submit.php">Confess!</a> | <?php showLoginCred(); ?>
+<a href="submit.php">Confess!</a> <?php showLoginCred(); ?>
 <hr />
 
 <?php
