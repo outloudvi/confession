@@ -6,7 +6,7 @@ echo HTMLhead('Get Cookie | ' . $ctitle, true);
 
 <body>
 
-<h1> Get Cookie </h1> <br />
+<h1> Get Cookie </h1>
 <a href="index.php">&lt;&lt;Main page</a> | <a href="submit.php">Confess!</a> <?php showLoginCred(); ?>
 <hr />
 

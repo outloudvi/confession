@@ -5,7 +5,7 @@ echo HTMLhead('Submit | ' . $ctitle);
 ?>
 
 <body>
-<h1> Submit your confession </h1> <br />
+<h1> Submit your confession </h1>
 <a href="index.php">&lt;&lt;Back to main page</a> <?php showLoginCred(); ?>
 <hr />
 

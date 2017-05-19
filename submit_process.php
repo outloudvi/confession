@@ -5,7 +5,7 @@ echo HTMLhead('Just one step... | ' . $ctitle);
 ?>
 
 <body>
-<h1> Submit your confession </h1> <br />
+<h1> Submit your confession </h1>
 <a href="submit.php">&lt;&lt; Rewrite</a> <?php showLoginCred(); ?>
 <hr />
 

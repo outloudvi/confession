@@ -5,7 +5,7 @@ echo HTMLhead('Submitting... | ' . $ctitle, false);
 ?>
 
 <body>
-<h1> Submitting... </h1> <br />
+<h1> Submitting... </h1>
 <a href="submit.php">&lt;&lt; Rewrite</a> <?php showLoginCred(); ?>
 <hr />
 

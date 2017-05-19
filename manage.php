@@ -6,7 +6,7 @@ echo HTMLhead('Management | ' . $ctitle, true);
 
 <body>
 
-<h1> Cookie Management </h1> <br />
+<h1> Cookie Management </h1>
 <a href="index.php">&lt;&lt;Main page</a> | <a href="submit.php">Confess!</a> <?php showLoginCred(); ?>
 <hr />
 
