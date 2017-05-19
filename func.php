@@ -235,12 +235,12 @@ function showContent( $num=5, $offset=0 )
         $thetime = date("Y-m-d H:i:s",$line['time']);
         echo "<blockquote>";
         echo $line['content'];
-        echo "</blockquote><br />";
+        echo "</blockquote>";
         if( isset($_COOKIE['read_' . $line['id']] ) )
-            echo "<grey>Voted</grey>";
+            echo "<span class=stat><grey>Voted</grey>";
         else
-            echo "<a href='read.php?id=" . $line['id'] . "'>Vote as readed</a>";
-        echo " | " . $line['read'] ." click(s) | <grey>#" . $line['id'] . " Posted by " . "Anonymous" . " at " . $thetime .  "</grey><br />";
+            echo "<span class=stat><a class=var href='read.php?id=" . $line['id'] . "'>Vote as readed</a>";
+        echo " | " . $line['read'] ." click(s) | <grey>#" . $line['id'] . " Posted by " . "Anonymous" . " at " . $thetime .  "</grey></span><br />";
     }
     echo "</div>";
     echo "<script type='text/javascript'>loadFinished();</script>";
@@ -275,6 +275,9 @@ function HTMLhead($title, $notail=false, $charset='utf-8')
     <meta charset="$charset">
     <title> $title </title>
 EOF;
+    global $cusecss;
+    if ($cusecss != 'plain')
+        $dt = $dt . "<link rel='stylesheet' href='css/" . $cusecss . ".css' />";
     if (!$notail)
     {
         $dt = $dt . '</head>';
@@ -289,7 +292,7 @@ EOF;
 function showVersion()
 {
     global $CONF_VERSION;
-    echo "Powered by <a href='https://github.com/outloudvi/confession'>Confession</a> $CONF_VERSION.";
+    echo "<span id=foot-version >Powered by <a href='https://github.com/outloudvi/confession'>Confession</a> $CONF_VERSION.</span>";
 }
 
 ?>
