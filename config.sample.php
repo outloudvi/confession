@@ -21,6 +21,13 @@ $cmysql['dbname'] = '';  // MySQL server database name
 
 // General
 $ctimezone = "Asia/Shanghai"; // Timezone
+$cusecss = 'plain'; // CSS Ussge:
+// Decide the CSS for the page.
+// plain   : No CSS.
+// (others): Use a certain theme.
+// Built-in theme:
+//    easy - an easy theme.
+// Use your own by creating a CSS file in css/.
 
 // Administration
 $cadminPassword = ""; // Password for administrator. The administration will NOT be useable if the password is empty.
