@@ -57,6 +57,7 @@ function add_confession($content="", $cookieid, $ip, $useragent)
 {
     global $pdo;
     connect();
+    $content = htmlentities( $content, ENT_QUOTES, 'UTF-8');
     $time = time();
     $content = $pdo -> quote ($content);
     $result = $pdo -> exec (" INSERT INTO `content` (`id`, `content`, `cookieid`, `time`, `ip`, `useragent`, `read`) VALUES ('' , $content, '$cookieid', '$time', '$ip', '$useragent', 0); ");
